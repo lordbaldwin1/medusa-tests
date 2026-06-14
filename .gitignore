@@ -15,6 +15,9 @@ node_modules
 
 # Testing
 coverage
+playwright-report/
+test-results/
+blob-report/
 
 # Next.js
 **/.next/
@@ -33,6 +36,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Local env files
+.env
 **/.env
 **/.env.local
 **/.env.development.local
