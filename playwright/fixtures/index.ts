@@ -1,0 +1,14 @@
+import { HomePage } from "../pages/HomePage"
+import { test as base, expect } from "@playwright/test";
+
+type Fixtures = {
+  homePage: HomePage;
+}
+
+const test = base.extend<Fixtures>({
+  homePage: async ({ page }, use) => {
+    await use(new HomePage(page));
+  },
+});
+
+export { test, expect };

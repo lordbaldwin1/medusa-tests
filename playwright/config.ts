@@ -1,7 +1,4 @@
-import dotenv from "dotenv";
-import path from "path";
-
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
+import "dotenv/config";
 
 function envOrThrow(key: string, fallback?: string) {
   const value = process.env[key] ?? fallback;
@@ -13,8 +10,11 @@ function envOrThrow(key: string, fallback?: string) {
 
 export const config = {
   BASE_URL: envOrThrow("PLAYWRIGHT_BASE_URL", "http://localhost:8000"),
+  BACKEND_API_URL: envOrThrow("BACKEND_API_URL", "http://localhost:9000"),
   DEFAULT_COUNTRY_CODE: envOrThrow("PLAYWRIGHT_COUNTRY_CODE", "dk"),
-  MOBILE_VIEWPORT_BREAKPOINT: 1024,
+  MOBILE_VIEWPORT_BREAKPOINT: 1024, // TODO: move to env?
+  X_PUBLISHABLE_API_KEY: envOrThrow("X_PUBLISHABLE_API_KEY"),
+  DEFAULT_CUSTOMER_PASSWORD: "testpassword", // TODO: move to env
 }
 
 export function localizedPath(route = ""): string {
