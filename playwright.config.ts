@@ -13,6 +13,8 @@ export default defineConfig({
     baseURL: config.BASE_URL,
     trace: "on-first-retry",
     testIdAttribute: "data-testid",
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
   },
   projects: [
     {

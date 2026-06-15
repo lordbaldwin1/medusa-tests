@@ -1,4 +1,4 @@
-import { APIRequestContext, expect, request } from "@playwright/test";
+import { APIRequestContext, expect, Page, request } from "@playwright/test";
 import { config } from "../config";
 
 type Address = {
@@ -87,9 +87,27 @@ export class CustomerApi {
     });
     expect(response.status()).toBe(200);
     const { token } = (await response.json()) as { token: string };
-    console.log(response.headers());
     return token;
   }
 
   // need to have helper for cookie session id
+  async getSessionCookie(token: string) {
+    const response = await this.request.post(`${config.BACKEND_API_URL}/auth/session`, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+    expect(response.status()).toBe(200);
+  }
+
+  async createSessionForPage(page: Page, token: string) {
+    const response = await page.request.post(`${config.BACKEND_API_URL}/auth/session`, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+    expect(response.status()).toBe(200);
+    // console.log(await response.headers());
+    // const connectSid = await response.headers()[]
+  }
 }
