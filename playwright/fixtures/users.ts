@@ -7,21 +7,25 @@ import { randomUUID } from "crypto";
 import { config } from "../config";
 import { Page } from "@playwright/test";
 import { CustomerApi } from "../api-clients/CustomerApi";
+import { AdminApi } from "../api-clients/AdminApi";
 
 // user -> user.apiLogin();
 
 export class User {
+  readonly id: string;
   readonly email: string;
   readonly password: string;
   private page: Page;
   private customerApi: CustomerApi;
 
   constructor(
+    id: string,
     email: string,
     password: string,
     page: Page,
     customerApi: CustomerApi,
   ) {
+    this.id = id;
     this.email = email;
     this.password = password;
     this.page = page;
@@ -62,14 +66,17 @@ export class Users {
       email,
       password,
     );
-    await customerApi.createCustomer(email, token);
+    const { id } = await customerApi.createCustomer(email, token);
 
-    const user = new User(email, password, this.page, customerApi);
+    const user = new User(id, email, password, this.page, customerApi);
     this.created.push(user);
     return user;
   }
 
   async deleteAll() {
-    // loop over created and delete via api
+    const adminApi = new AdminApi(this.page.request);
+    for (const user of this.created) {
+      await adminApi.deleteCustomer(user.id);
+    }
   }
 }

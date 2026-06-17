@@ -1,3 +1,4 @@
+import { AdminApi } from "../api-clients/AdminApi";
 import { expect, test } from "../fixtures";
 
 test.describe("testing auth", () => {
@@ -6,5 +7,8 @@ test.describe("testing auth", () => {
     await user.apiLogin();
     await accountPage.navigate();
     await expect(accountPage.customerEmail).toContainText(user.email);
+  });
+
+  test("admin auth", async ({ request }) => {
   });
 });

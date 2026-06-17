@@ -23,18 +23,20 @@ type Address = {
 };
 
 type CreateCustomerResponse = {
-  id: string;
-  email: string;
-  company_name: string | null;
-  first_name: string;
-  last_name: string;
-  phone: string;
-  metadata: Record<string, any> | null;
-  has_account: boolean;
-  deleted_at: string | null;
-  created_at: string;
-  updated_at: string;
-  addresses: Address[];
+  customer: {
+    id: string;
+    email: string;
+    company_name: string | null;
+    first_name: string;
+    last_name: string;
+    phone: string;
+    metadata: Record<string, any> | null;
+    has_account: boolean;
+    deleted_at: string | null;
+    created_at: string;
+    updated_at: string;
+    addresses: Address[];
+  };
 };
 
 export class CustomerApi {
@@ -74,7 +76,7 @@ export class CustomerApi {
       }
     });
     expect(response.status()).toBe(200);
-    const customer = (await response.json()) as CreateCustomerResponse;
+    const { customer } = (await response.json()) as CreateCustomerResponse;
     return customer;
   }
 

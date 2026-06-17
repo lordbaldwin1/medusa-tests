@@ -1,0 +1,26 @@
+{
+  "checkoutData": {
+    "productName": "Medusa Sweatshirt",
+    "productDescription": "Reimagine the feeling of a classic sweatshirt. With our cotton sweatshirt, everyday essentials no longer have to be ordinary.",
+    "variant": "L",
+    "weight": "400 g",
+    "basePrice": "10.00",
+    "shippingMethod": "Standard Shipping",
+    "shippingCost": "10.00",
+    "quantity": 1,
+    "promotionCode": "TEST123",
+    "promotionAmount": "1.00",
+    "totalCost": "19.00",
+    "shippingDetails": {
+      "firstName": "tester",
+      "lastName": "testing",
+      "address": "123456 SE 20th Ave",
+      "company": "awesome company",
+      "postalCode": "12345",
+      "city": "Noord",
+      "country": "Denmark",
+      "email": "tester123@gmail.com",
+      "phone": "5038882222"
+    }
+  }
+}

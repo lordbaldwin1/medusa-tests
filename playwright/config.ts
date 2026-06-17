@@ -15,6 +15,8 @@ export const config = {
   MOBILE_VIEWPORT_BREAKPOINT: 1024, // TODO: move to env?
   X_PUBLISHABLE_API_KEY: envOrThrow("X_PUBLISHABLE_API_KEY"),
   DEFAULT_CUSTOMER_PASSWORD: "testpassword", // TODO: move to env
+  ADMIN_EMAIL: "admin@test.com",
+  ADMIN_PASSWORD: "testpassword",
 }
 
 export function localizedPath(route = ""): string {
