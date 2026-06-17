@@ -1,8 +1,9 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
+import { config } from "../config";
 
-
-export class Navbar extends BasePage {
+export class Navbar {
+  private readonly page: Page;
   readonly menuButton: Locator;
   readonly navMenuPopup: Locator;
 
@@ -15,8 +16,10 @@ export class Navbar extends BasePage {
   readonly popupAccountLink: Locator;
   readonly popupCartLink: Locator;
 
+  readonly cartDropdown: Locator;
+
   constructor(page: Page) {
-    super(page);
+    this.page = page;
     this.menuButton = this.page.getByTestId("nav-menu-button");
     this.navMenuPopup = this.page.getByTestId("nav-menu-popup");
 
@@ -29,11 +32,20 @@ export class Navbar extends BasePage {
     this.popupAccountLink = this.page.getByTestId("account-link");
     this.popupCartLink = this.page.getByTestId("cart-link");
 
+    this.cartDropdown = this.page.getByTestId("nav-cart-dropdown");
   }
 
   async openNavMenu() {
     await this.menuButton.click();
     await expect(this.navMenuPopup).toBeVisible();
+  }
+
+  isMobile() {
+    const viewport = this.page.viewportSize();
+    if (!viewport) {
+      throw new Error("Viewport size is null in isMobile() call");
+    }
+    return viewport.width < config.MOBILE_VIEWPORT_BREAKPOINT;
   }
 
   async gotoAccount() {
@@ -44,5 +56,9 @@ export class Navbar extends BasePage {
       await this.navAccountLink.click();
     }
     // TODO: return account page object
+  }
+
+  async hoverCart() {
+    await this.navCartLink.hover();
   }
 }
