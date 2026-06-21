@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from "@playwright/test";
-import { BasePage } from "./BasePage";
 import { config } from "../config";
+import { CartPage } from "./CartPage";
 
 export class Navbar {
   private readonly page: Page;
@@ -60,5 +60,12 @@ export class Navbar {
 
   async hoverCart() {
     await this.navCartLink.hover();
+  }
+
+  async gotoCart() {
+    await this.navCartLink.click();
+    const cartPage = new CartPage(this.page);
+    await expect(cartPage.table).toBeVisible();
+    return cartPage;
   }
 }

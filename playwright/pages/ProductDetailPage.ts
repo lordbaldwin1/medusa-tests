@@ -1,7 +1,9 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
+import { Navbar } from "./Navbar";
 
 export class ProductDetailPage extends BasePage {
+  readonly navbar: Navbar;
   readonly productContainer: Locator;
   readonly productTitle: Locator;
   readonly productDescription: Locator;
@@ -16,6 +18,7 @@ export class ProductDetailPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
+    this.navbar = new Navbar(this.page);
     this.productContainer = this.page.getByTestId("product-container");
     this.productTitle = this.productContainer.getByTestId("product-title");
     this.productDescription = this.productContainer.getByTestId(
@@ -23,10 +26,15 @@ export class ProductDetailPage extends BasePage {
     );
     this.productPrice = this.productContainer.getByTestId("product-price");
     this.productOptions = this.productContainer.getByTestId("product-options");
-    this.addProductButton = this.productContainer.getByTestId("add-product-button");
+    this.addProductButton =
+      this.productContainer.getByTestId("add-product-button");
 
-    this.mobileProductOptionsButton = this.productContainer.getByTestId("mobile-actions-button");
-    this.mobileProductOptionsModal = this.page.getByTestId("mobile-actions-modal");
+    this.mobileProductOptionsButton = this.productContainer.getByTestId(
+      "mobile-actions-button",
+    );
+    this.mobileProductOptionsModal = this.page.getByTestId(
+      "mobile-actions-modal",
+    );
     this.mobileAddProductButton = this.page.getByTestId("mobile-cart-button");
     this.mobileCloseModalButton = this.page.getByTestId("close-modal-button");
   }
@@ -72,8 +80,10 @@ export class ProductDetailPage extends BasePage {
   async addToCart() {
     if (this.isMobile()) {
       await this.mobileAddProductButton.click();
+      await expect(this.mobileAddProductButton).not.toContainText("Loading");
     } else {
       await this.addProductButton.click();
+      await expect(this.addProductButton).not.toContainText("Loading");
     }
   }
 }

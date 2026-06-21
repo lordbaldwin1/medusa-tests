@@ -7,10 +7,11 @@
     "basePrice": "10.00",
     "shippingMethod": "Standard Shipping",
     "shippingCost": "10.00",
+    "paymentMethod": "Manual Payment",
     "quantity": 1,
     "promotionCode": "TEST123",
     "promotionAmount": "1.00",
-    "totalCost": "19.00",
+    "totalCost": "20.00",
     "shippingDetails": {
       "firstName": "tester",
       "lastName": "testing",
@@ -19,6 +20,7 @@
       "postalCode": "12345",
       "city": "Noord",
       "country": "Denmark",
+      "state": "Test",
       "email": "tester123@gmail.com",
       "phone": "5038882222"
     }

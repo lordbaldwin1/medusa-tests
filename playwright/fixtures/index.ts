@@ -5,6 +5,19 @@ import { AccountPage } from "../pages/AccountPage";
 import { StorePage } from "../pages/StorePage";
 import { readFile } from "fs/promises";
 
+export type ShippingDetails = {
+  firstName: string;
+  lastName: string;
+  address: string;
+  company: string;
+  postalCode: string;
+  city: string;
+  country: string;
+  state: string;
+  email: string;
+  phone: string;
+};
+
 type CheckoutData = {
   productName: string;
   productDescription: string;
@@ -13,22 +26,15 @@ type CheckoutData = {
   basePrice: string;
   shippingMethod: string;
   shippingCost: string;
+  paymentMethod: string;
   quantity: number;
   promotionCode: string;
   promotionAmount: string;
   totalCost: string;
-  shippingDetails: {
-    firstName: string;
-    lastName: string;
-    address: string;
-    company: string;
-    postalCode: string;
-    city: string;
-    country: string;
-    email: string;
-    phone: string;
-  };
+  shippingDetails: ShippingDetails;
 };
+
+
 
 type Fixtures = {
   homePage: HomePage;

@@ -1,14 +1,16 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
+import { Navbar } from "./Navbar";
 import { ProductDetailPage } from "./ProductDetailPage";
 
-
 export class StorePage extends BasePage {
+  readonly navbar: Navbar;
   readonly productsList: Locator;
   readonly productWrappers: Locator;
 
   constructor(page: Page) {
     super(page);
+    this.navbar = new Navbar(this.page);
     this.productsList = this.page.getByTestId("products-list");
     this.productWrappers = this.page.getByTestId("product-wrapper");
   }
